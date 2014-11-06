@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/rabbit"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+  <!--<start id="amqp_connectionFactory_bean"/>--> 
+  <connection-factory id="connectionFactory" />
+  <!--<end id="amqp_connectionFactory_bean"/>--> 
+	
+	
+  <!--<start id="amqp_admin_and_queue_beans"/>--> 
+<admin connection-factory="connectionFactory"/>
+
+<queue id="spittleAlertQueue" name="spittle.alerts" />
+  <!--<end id="amqp_admin_and_queue_beans"/>--> 
+	
+  <fanout-exchange name="spittle.alert.exchange">
+    <bindings>
+      <binding queue="spittle.alerts" />
+    </bindings>
+  </fanout-exchange>
+
+<!-- ======================================= -->
+<!-- ALTERNATIVE CONFIGURATION OPTIONS BELOW -->
+<!-- ======================================= -->
+<!-- 
+  <!==<start id="amqp_connectionFactory_simple_bean"/>==>
+  <connection-factory/>
+  <!==<end id="amqp_connectionFactory_simple_bean"/>==>
+
+  <!==<start id="amqp_connectionFactory_complete_bean"/>==>
+  <connection-factory id="connectionFactory" 
+    host="${rabbitmq.host}" 
+    port="${rabbitmq.port}"
+    username="${rabbitmq.username}"
+    password="${rabbitmq.password}" />
+  <!==<end id="amqp_connectionFactory_complete_bean"/>==>
+  
+  <!==<start id="amqp_fanout_exchange_beans"/>==> 
+<admin connection-factory="connectionFactory" />
+<queue name="spittle.alert.queue.1" >
+<queue name="spittle.alert.queue.2" >
+<queue name="spittle.alert.queue.3" >
+<fanout-exchange name="spittle.fanout">
+ <bindings>
+  <binding queue="spittle.alert.queue.1" />
+  <binding queue="spittle.alert.queue.2" />
+  <binding queue="spittle.alert.queue.3" />
+ </bindings>
+</fanout-exchange>   
+  <!==<end id="amqp_fanout_exchange_beans"/>==>
+-->	
+</beans:beans>

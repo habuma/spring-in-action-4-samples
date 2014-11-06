@@ -1,0 +1,7 @@
+This project contains examples from section 12.3 of Spring in Action 4. The main class
+to pay attention to is src/test/java/cart/CartTest.java. This class contains several
+test cases that exercise RedisTemplate as discussed in section 12.3. The test method
+names correspond to the subsections of section 12.3.
+
+As these tests perform operations against a Redis server, you must have a Redis server
+running and listening for requests on localhost port 6379 (Redis' default port).

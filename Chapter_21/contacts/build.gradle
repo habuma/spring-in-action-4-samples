@@ -1,0 +1,32 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.4.RELEASE")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+
+jar {
+	baseName = 'contacts'
+	version  = '0.1.0'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.boot:spring-boot-starter-jdbc")
+	compile("org.thymeleaf:thymeleaf-spring4")
+	compile("com.h2database:h2")
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.0'
+}

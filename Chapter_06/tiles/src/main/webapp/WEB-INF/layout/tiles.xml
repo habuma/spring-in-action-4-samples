@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+  <definition name="base" template="/WEB-INF/layout/page.jsp">
+    <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+  </definition>
+
+  <definition name="home" extends="base">
+    <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+  </definition>
+
+  <definition name="registerForm" extends="base">
+    <put-attribute name="body" value="/WEB-INF/views/registerForm.jsp" />
+  </definition>
+
+  <definition name="profile" extends="base">
+    <put-attribute name="body" value="/WEB-INF/views/profile.jsp" />
+  </definition>
+
+  <definition name="spittles" extends="base">
+    <put-attribute name="body" value="/WEB-INF/views/spittles.jsp" />
+  </definition>
+
+  <definition name="spittle" extends="base">
+    <put-attribute name="body" value="/WEB-INF/views/spittle.jsp" />
+  </definition>
+
+</tiles-definitions>

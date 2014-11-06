@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- Import shared AMQP configuration -->
+  <beans:import resource="amqp-shared.xml" />
+
+  <!--<start id="amqp_rabbitTemplate_with_routingKey"/>-->
+  <template id="rabbitTemplate" 
+          connection-factory="connectionFactory" 
+          routing-key="spittle.alerts" />
+  <!--<end id="amqp_rabbitTemplate_with_routingKey"/>-->
+
+
+
+<!-- ======================================= -->
+<!-- ALTERNATIVE CONFIGURATION OPTIONS BELOW -->
+<!-- ======================================= -->
+<!-- 
+  <!==<start id="amqp_rabbitTemplate_with_exchange_and_routingKey"/>==>
+  <template id="rabbitTemplate" 
+          connection-factory="connectionFactory" 
+          exchange="spittle.alert.exchange"
+          routing-key="spittle.alerts" />
+  <!==<end id="amqp_rabbitTemplate_with_exchange_and_routingKey"/>==>
+
+  <!==<start id="amqp_rabbitTemplate_simple"/>==>
+  <template id="rabbitTemplate" 
+          connection-factory="connectionFactory" />
+  <!==<end id="amqp_rabbitTemplate_simple"/>==>
+
+ -->
+
+</beans:beans>

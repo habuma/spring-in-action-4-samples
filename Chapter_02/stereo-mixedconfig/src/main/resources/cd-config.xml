@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:c="http://www.springframework.org/schema/c"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="compactDisc"
+        class="soundsystem.BlankDisc"
+        c:_0="Sgt. Pepper's Lonely Hearts Club Band"
+        c:_1="The Beatles">
+    <constructor-arg>
+      <list>
+        <value>Sgt. Pepper's Lonely Hearts Club Band</value>
+        <value>With a Little Help from My Friends</value>
+        <value>Lucy in the Sky with Diamonds</value>
+        <value>Getting Better</value>
+        <value>Fixing a Hole</value>
+        <!-- ...other tracks omitted for brevity... -->
+      </list>
+    </constructor-arg>
+  </bean>
+
+</beans>

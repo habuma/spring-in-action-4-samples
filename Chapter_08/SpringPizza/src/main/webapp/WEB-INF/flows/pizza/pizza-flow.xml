@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/webflow 
+  http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <var name="order" class="com.springinaction.pizza.domain.Order"/>
+    
+    <!-- Customer -->
+    <subflow-state id="customer" subflow="pizza/customer">
+      <input name="order" value="order"/>
+      <transition on="customerReady" to="order" />
+    </subflow-state>
+    
+    <!-- Order -->
+    <subflow-state id="order" subflow="pizza/order">
+      <input name="order" value="order"/>
+      <transition on="orderCreated" to="payment" />
+    </subflow-state>
+        
+    <!-- Payment -->
+    <subflow-state id="payment" subflow="pizza/payment">
+      <input name="order" value="order"/>
+      <transition on="paymentTaken" to="saveOrder"/>      
+    </subflow-state>
+        
+    <action-state id="saveOrder">
+        <evaluate expression="pizzaFlowActions.saveOrder(order)" />
+        <transition to="thankYou" />
+    </action-state>
+    
+    <view-state id="thankYou">
+      <transition to="endState" />
+    </view-state>
+                
+    <!-- End state -->
+    <end-state id="endState" />
+    
+    <global-transitions>
+      <transition on="cancel" to="endState" />
+    </global-transitions>
+</flow>

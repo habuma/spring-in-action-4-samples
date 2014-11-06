@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+jar {
+    baseName = 'knight'
+    version =  '0.0.1-SNAPSHOT'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework:spring-context:${springVersion}")
+    compile("org.aspectj:aspectjweaver:${aspectJVersion}")
+    compile("log4j:log4j:${log4jVersion}")
+
+    testCompile("junit:junit:${junitVersion}")
+    testCompile("org.mockito:mockito-core:${mockitoVersion}")
+    testCompile("org.springframework:spring-test:${springVersion}")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}

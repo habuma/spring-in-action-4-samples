@@ -1,0 +1,7 @@
+This example demonstrates how to send messages to specific users.
+
+After starting the application, point your browser at localhost:8080/stomp and signin as either chuck/password or fred/password.
+Type messages into the form and submit.
+
+To really demonstrate user-targeted messages, open the app in two separate browsers, one signed in as fred and one signed in as chuck.
+Then send messages that mention the other user (e.g., "Hello @chuck" or "Hiya @fred").

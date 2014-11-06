@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>Home</title>
+    <script th:src="@{/webjars/sockjs-client/0.3.4/sockjs.min.js}"></script>
+    <script th:src="@{/webjars/stomp-websocket/2.3.0/stomp.min.js}"></script>
+    <script th:src="@{/webjars/jquery/2.0.3/jquery.min.js}"></script>
+  </head>
+  <body>
+  	<p>
+  	Try opening this app in two separate browsers.
+  	Then post messages in each to see them sent to the other browser.
+  	Try mentioning each user (@fred and @chuck) to see the user-targeted "You just got mentioned" message appear in the appropriate user's browser.
+  	</p>
+  
+  	<form id="spittleForm">
+  		<textarea rows="4" cols="60" name="text"></textarea>
+  		<input type="submit"/>
+  	</form>
+  
+    <script th:inline="javascript">
+    	$('#spittleForm').submit(function(e){
+    		e.preventDefault();
+    		var text = $('#spittleForm').find('textarea[name="text"]').val();
+    		sendSpittle(text);
+    	});
+    
+      var sock = new SockJS([[@{/spittr}]]);
+      var stomp = Stomp.over(sock);
+
+      stomp.connect('guest', 'guest', function(frame) {
+        console.log('*****  Connected  *****');
+        stomp.subscribe("/topic/spittlefeed", handleSpittle);
+        stomp.subscribe("/user/queue/notifications", handleNotification);
+      });
+      
+      function handleSpittle(message) {
+    	  console.log('Spittle:', message);
+    	  $('#output').append("<b>Received spittle: " + JSON.parse(message.body).message + "</b><br/>");
+      }
+      
+      function handleNotification(message) {
+        console.log('Notification: ', message);
+        $('#output').append("<b>Received: " + 
+            JSON.parse(message.body).message + "</b><br/>")
+      }
+      
+      function sendSpittle(text) {
+        console.log('Sending Spittle');
+        stomp.send("/app/spittle", {}, 
+            JSON.stringify({ 'text': text }));
+      }
+
+      $('#stop').click(function() {sock.close()});
+      </script>
+    
+    <div id="output"></div>
+  </body>
+</html>

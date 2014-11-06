@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.2.xsd
+		http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 
+<bean id="connectionFactory"
+      class="org.apache.activemq.spring.ActiveMQConnectionFactory" />
+
+<bean id="connectionFactory"
+      class="org.apache.activemq.spring.ActiveMQConnectionFactory"
+      p:brokerURL="tcp://localhost:61616" />
+
+<amq:connectionFactory id="connectionFactory" />
+
+<bean id="jmsTemplate" 
+      class="org.springframework.jms.core.JmsTemplate"
+      c:_-ref="connectionFactory" />
+
+<bean id="spittleQueue" class="org.apache.activemq.command.ActiveMQQueue"
+      c:_="spittle.alert.queue" />
+
+<bean id="spittleTopic" class="org.apache.activemq.command.ActiveMQTopic"
+      c:_="spittle.alert.topic" />
+
+<bean id="jmsTemplate" 
+      class="org.springframework.jms.core.JmsTemplate"
+      c:_-ref="connectionFactory" 
+      p:defaultDestination-ref="queue"/>
+
+<bean id="messageConverter" 
+      class="org.springframework.jms.support.converter.MappingJacksonMessageConverter" p: />
+
+<bean id="jmsTemplate" 
+      class="org.springframework.jms.core.JmsTemplate"
+      c:_-ref="connectionFactory" 
+      p:defaultDestinationName="spittle.alert.queue" 
+      p:messageConverter-ref="messageConverter" />
+ -->
+
+<amq:queue id="spittleQueue" physicalName="spittle.alert.queue" />
+
+<amq:topic id="spittleTopic" physicalName="spittle.alert.topic" />
+
+<amq:connectionFactory id="connectionFactory" 
+      brokerURL="tcp://localhost:61616" />
+
+<bean id="jmsTemplate" 
+      class="org.springframework.jms.core.JmsTemplate"
+      c:_-ref="connectionFactory" 
+      p:defaultDestinationName="spittle.alert.queue" />
+
+<bean id="alertService" class="spittr.alerts.AlertServiceImpl"
+      c:_-ref="jmsTemplate" />
+
+<jms:listener-container>
+  <jms:listener destination="spittle.alert.queue" 
+                ref="spittleHandler" 
+                method="handleSpittleAlert" />
+</jms:listener-container>
+
+<bean id="spittleHandler" class="spittr.alerts.SpittleAlertHandler" />
+
+</beans>

@@ -1,0 +1,32 @@
+apply plugin: 'eclipse'
+apply plugin: 'java'
+
+dependencies {
+	compile "org.springframework:spring-context:$springVersion"
+	compile "org.springframework:spring-context-support:$springVersion"
+	compile "org.springframework:spring-jdbc:$springVersion"
+	compile "com.h2database:h2:$h2Version"
+    compile "javax.inject:javax.inject:1"
+
+    compile "net.sf.ehcache:ehcache:$ehcacheVersion"
+    compile "net.sf.ehcache:ehcache-jcache:$ehcacheJCacheVersion"
+
+    testCompile "junit:junit-dep:$junitVersion"
+    testCompile "org.springframework:spring-test:$springVersion"
+}
+
+repositories {
+	maven { url 'http://maven.springframework.org/release' }
+	maven { url 'http://maven.springframework.org/milestone' }
+	maven { url 'http://maven.springframework.org/snapshot' }
+	maven { url 'http://download.java.net/maven/2' }
+	mavenCentral()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
+
+jar {
+        baseName = 'spittr'
+}

@@ -1,0 +1,19 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+    mavenCentral()
+    maven { url "http://m2.neo4j.org/content/repositories/releases" }
+}
+
+dependencies {
+    compile("org.springframework:spring-context:4.0.6.RELEASE")
+    compile("org.springframework.data:spring-data-neo4j:3.1.2.RELEASE")
+    compile("javax.validation:validation-api:1.0.0.GA")
+    testCompile("junit:junit-dep:4.11")
+    testCompile("org.springframework:spring-test:4.0.6.RELEASE")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+	<context:component-scan base-package="spittr.db.hibernate4" />
+
+ 	<bean id="transactionManager" 
+ 		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+ 		c:_-ref="sessionFactory" />
+
+	<jdbc:embedded-database id="dataSource" type="H2">
+		<jdbc:script location="spittr/db/hibernate4/schema.sql" />
+		<jdbc:script location="spittr/db/hibernate4/test-data.sql" />
+	</jdbc:embedded-database>
+
+ 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="packagesToScan" value="com.habuma.spitter.domain" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="dialect">org.hibernate.dialect.H2Dialect</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+</beans>

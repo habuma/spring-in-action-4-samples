@@ -1,0 +1,47 @@
+apply plugin: 'eclipse'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+
+dependencies {
+  compile "org.springframework:spring-webmvc:$springVersion"
+  compile "org.springframework:spring-jdbc:$springVersion"
+  compile "org.springframework.security:spring-security-config:$springSecurityVersion"
+  compile "org.springframework.security:spring-security-web:$springSecurityVersion"
+  compile "com.h2database:h2:$h2Version"
+  compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
+  compile "org.apache.commons:commons-lang3:$commonsLangVersion"
+  compile "org.thymeleaf:thymeleaf-spring4:$thymeleafVersion"
+  compile "org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE"
+  compile "org.springframework.ldap:spring-ldap-core:2.0.1.RELEASE"
+
+  providedCompile "javax.servlet:javax.servlet-api:$servletApiVersion"
+
+  testCompile "junit:junit-dep:$junitVersion"
+  testCompile "org.springframework:spring-test:$springVersion"
+  testCompile "org.mockito:mockito-core:$mockitoVersion"
+  testCompile "org.hamcrest:hamcrest-library:$hamcrestVersion"
+}
+
+repositories {
+  maven { url 'http://maven.springframework.org/release' }
+  maven { url 'http://maven.springframework.org/milestone' }
+  maven { url 'http://maven.springframework.org/snapshot' }
+  maven { url 'http://download.java.net/maven/2' }
+  mavenCentral()
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.8'
+}
+
+war {
+  baseName = 'spittr'
+}
+
+eclipse {
+  wtp {
+    component {
+      contextPath = 'spittr'
+    }
+  }
+}

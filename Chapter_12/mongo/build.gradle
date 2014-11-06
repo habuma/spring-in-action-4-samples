@@ -1,0 +1,18 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework:spring-context:4.0.6.RELEASE")
+    compile("org.springframework.data:spring-data-mongodb:1.5.2.RELEASE")
+    compile("org.mongodb:mongo-java-driver:2.11.3") // needed so that fongo will work
+    testCompile("junit:junit-dep:4.11")
+    testCompile("org.springframework:spring-test:4.0.6.RELEASE")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:websocket="http://www.springframework.org/schema/websocket"
+ xsi:schemaLocation="
+  http://www.springframework.org/schema/websocket 
+  http://www.springframework.org/schema/websocket/spring-websocket.xsd
+  http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- 
+  This configuration file is not used, but remains here as an example
+  of how to configure low-level websocket in Spring using XML.
+  See WebSocketConfig.java for the Java configuration of websocket 
+  that is in use.
+  -->
+
+  <websocket:handlers>
+    <websocket:mapping handler="marcoHandler" path="/marco" />
+    <websocket:sockjs />
+  </websocket:handlers>
+	
+  <bean id="marcoHandler" 
+        class="marcopolo.MarcoHandler" />
+
+</beans>
