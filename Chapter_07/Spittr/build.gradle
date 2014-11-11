@@ -8,7 +8,7 @@ dependencies {
 	compile "com.h2database:h2:$h2Version"
 	compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
 	compile "org.apache.commons:commons-lang3:$commonsLangVersion"
-	compile "org.thymeleaf:thymeleaf-spring3:$thymeleafVersion"
+	compile "org.thymeleaf:thymeleaf-spring4:$thymeleafVersion"
 
 	compile "commons-fileupload:commons-fileupload:1.3"
 
