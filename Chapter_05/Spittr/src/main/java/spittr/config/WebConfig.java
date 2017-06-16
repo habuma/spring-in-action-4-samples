@@ -34,4 +34,31 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     super.addResourceHandlers(registry);
   }
 
+  /* This is the conf of Thymeleaf
+  @Bean
+  public ViewResolver viewResolver(){
+    ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+    viewResolver.setTemplateEngine(templateEngine());
+    System.out.println("create:viewResolver");
+    return viewResolver;
+  }
+
+  @Bean
+  public SpringTemplateEngine templateEngine(){
+    SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+    templateEngine.setTemplateResolver(templateResolver());
+    System.out.println("create:templateEngine");
+    return templateEngine;
+  }
+
+  @Bean
+  public TemplateResolver templateResolver(){
+    TemplateResolver templateResolver = new ServletContextTemplateResolver();
+    templateResolver.setPrefix("/WEB-INF/templates/");
+    templateResolver.setSuffix(".html");
+    templateResolver.setTemplateMode("HTML5");
+    System.out.println("create:templateResolver");
+    return templateResolver;
+  }*/
+
 }
