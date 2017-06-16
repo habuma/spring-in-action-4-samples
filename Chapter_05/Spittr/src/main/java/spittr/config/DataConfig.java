@@ -19,6 +19,18 @@ public class DataConfig {
             .addScript("schema.sql")
             .build();
   }
+
+  /*This is the dataSource of mysql
+   *please add mysql-connector-java:5.1.13 to bulid.gradle
+  @Bean
+  public DataSource dataSource() {
+    BasicDataSource ds=new BasicDataSource();
+    ds.setDriverClassName("com.mysql.jdbc.Driver");
+    ds.setUrl("jdbc:mysql://127.0.0.1:3306/spittr");
+    ds.setUsername("root");
+    ds.setPassword("987654321.");
+    return ds;
+  }*/
   
   @Bean
   public JdbcOperations jdbcTemplate(DataSource dataSource) {
