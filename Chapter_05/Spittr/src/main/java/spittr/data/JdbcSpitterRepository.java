@@ -13,10 +13,10 @@ import spittr.Spitter;
 @Repository
 public class JdbcSpitterRepository implements SpitterRepository {
   
-  private JdbcOperations jdbc;
+  private JdbcTemplate jdbc;
 
   @Autowired
-  public JdbcSpitterRepository(JdbcOperations jdbc) {
+  public JdbcSpitterRepository(JdbcTemplate jdbc) {
     this.jdbc = jdbc;
   }
 
